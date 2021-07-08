@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Register {% endblock %}
+
+{% block in_line_css %}
+<style>
+    body {
+        /*background-color: #80CFA9;*/
+    }
+
+    .login_button {
+        background-color: #FBA446;
+        color: white;
+        font-weight: bold;
+        font-size: 25px;
+        padding: 5px;
+        border: none;
+    }
+</style>
+{% endblock %}
+
+
+{% block in_container %}
+
+<h1 class="mt-5 text-center">Shipping Label Generator</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: rgb(251, 111, 111) !important;text-align: center;">
+            <strong style="color: white;">{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>    
+    {% endfor %}
+{% endif %}
+
+<div class="mt-5 mb-5 row">
+    <div class="col-2"></div>
+    <div class="col-8 col-sm-12">
+        <div class="d-lg-flex" style="justify-content: center;border: 1px solid black;">
+            <div class="d-flex side_img">
+                <img class="img-fluid" src="{% static 'images/shipping-labels.jpg' %}" alt="Shipping label">
+            </div>
+            <div class="form_div p-5">
+                <h3 class="text-center">Register</h3>
+
+                <form method="POST" onsubmit="return matchPassword()">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input name="username" type="username" class="form-control" id="username"
+                                placeholder="niel123" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input name="email" type="email" class="form-control" id="email"
+                                placeholder="niel@gmail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input name="password" type="password" class="form-control" id="password"
+                                placeholder="Password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Confirm password</label>
+                            <input name="confirm_pass" type="password" class="form-control" id="confirm_password"
+                                placeholder="Confirm password" required>
+                        </div>
+                        <div class="text-center mt-3 mb-3">
+                            <input class="btn login_button" type="submit" value="Register">
+                            <a class="btn login_button" href="{% url 'index' %}">Login</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+    function matchPassword() {
+        var pw1 = document.getElementById("password").value;
+        var pw2 = document.getElementById("confirm_password").value;
+        if (pw1 != pw2) {
+            alert("Passwords did not match");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+</script>
+
+
+{% endblock %}

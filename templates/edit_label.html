@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Edit Shipping Label {%endblock%}
+
+{% block in_line_css%}
+<style>
+    .submit_btn{
+            background-color: #FBA446;
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+            padding: 5px;
+            border: none;
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block above_container %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}" style="color: #4B7CEF;font-weight: 700;">Shipping Label
+            Generator</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="me-1 btn-group dropstart" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">{{ user.get_username }}</button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block in_container %}
+
+<h2 class="mt-3 text-center">Generate New Shipping Label</h2>
+<div class="mt-5 mb-5">
+    <form action="" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <input name="customer_name" type="text" value="{{shipping_label.customer_name}}" class="form-control" id="customer_name"
+                        placeholder="Customer Name">
+                    <label for="customer_name">Customer Name</label>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <input name="phone_number" type="number" value="{{shipping_label.phone_number}}" class="form-control" id="phone_number"
+                        placeholder="Phone Number">
+                    <label for="phone_number">Phone Number</label>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <textarea name="flat_house_no_building_name" class="form-control"
+                        placeholder="Flat /House No /Building Name" id="flat_house_no_building_name"
+                        style="height: 100px">{{shipping_label.falt_house_no_building_name}}</textarea>
+                    <label for="flat_house_no_building_name">Flat /House No /Building Name</label>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <input name="street_colony" type="text" value="{{shipping_label.street_colony}}" class="form-control" id="street_colony"
+                        placeholder="Street /Colony">
+                    <label for="street_colony">Street /Colony</label>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <input name="pincode" type="number" value="{{shipping_label.pincode}}" class="form-control" id="pincode" placeholder="Pincode">
+                    <label for="pincode">Pincode</label>
+                </div>
+            </div>
+            <div class="col-6 mb-3">
+                <div class="form-floating">
+                    <input name="city" type="text" value="{{shipping_label.city}}" class="form-control" id="city" placeholder="City">
+                    <label for="city">City</label>
+                </div>
+            </div>
+            <div class="col-6 mb-3">
+                <div class="form-floating">
+                    <input name="state" type="text" value="{{shipping_label.state}}" class="form-control" id="state" placeholder="State">
+                    <label for="state">State</label>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <input name="landmark" type="text" value="{{shipping_label.landmark}}" class="form-control" id="landmark" placeholder="Landmark">
+                    <label for="landmark">Landmark (Optional)</label>
+                </div>
+            </div>
+            <div class="col-12 mt-3 mb-5 text-center">
+                <button class="btn submit_btn" type="submit">Update</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

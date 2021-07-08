@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} History {%endblock%}
+
+{% block in_line_css%}
+<style>
+
+</style>
+
+{% endblock %}
+
+
+{% block above_container %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}" style="color: #4B7CEF;font-weight: 700;">Shipping Label
+            Generator</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="me-1 btn-group dropstart" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">{{ user.get_username }}</button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block in_container %}
+
+<div class="mt-5 mb-5 row" id="myProducts">
+    <input type="text" id="myFilter" class="form-control mb-4 mt-4" onkeyup="myFunction()"
+        placeholder="Search for card name...">
+    {% for shipping_label in shipping_labels %}
+
+    <div class="col-12 card mb-3 text-center">
+        <div class="card-body">
+            <h5 class="card-title">{{shipping_label.customer_name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">+91-{{shipping_label.phone_number}}</h6>
+            <p class="card-text p-0 m-0">{{shipping_label.falt_house_no_building_name}}</p>
+            <p class="card-text p-0 m-0">{{shipping_label.street_colony}}</p>
+            <p class="card-text p-0 m-0">{{shipping_label.landmark}}</p>
+            <p class="card-text p-0 m-0 mb-3">
+                {{shipping_label.city}},{{shipping_label.state}}-{{shipping_label.pincode}}</p>
+            <a href="{% url 'print-label' shipping_label.id %}" class="btn btn-outline-info card-link">Print</a>
+            <a href="{% url 'edit-label' shipping_label.id %}" class="btn btn-outline-secondary card-link">Edit</a>
+            <a href="{% url 'delete-label' shipping_label.id %}" class="btn btn-outline-danger card-link">Delete</a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+
+<script>
+    function myFunction() {
+        var input, filter, cards, cardContainer, title, i;
+        input = document.getElementById("myFilter");
+        filter = input.value.toUpperCase();
+        cardContainer = document.getElementById("myProducts");
+        cards = cardContainer.getElementsByClassName("card-body");
+        for (i = 0; i < cards.length; i++) {
+            title = cards[i].querySelector(".card-title");
+            if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+
+</script>
+
+{% endblock %}

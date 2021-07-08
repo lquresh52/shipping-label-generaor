@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {%endblock%}
+
+{% block in_line_css%}
+<style>
+    .center {
+        position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+border: 5px solid #35CAA8;
+padding: 10px;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block above_container %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}" style="color: #4B7CEF;font-weight: 700;">Shipping Label Generator</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="me-1 btn-group dropstart" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">{{ user.get_username }}</button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block in_container %} 
+
+
+<div class="d-lg-flex center text-center">
+    <a class="btn" style="font-weight: 700;margin: 10px;background-color: #298B65;" href="{% url 'generate-new-label' %}">Create New Shipping Label</a>
+    <a class="btn" style="background-color: #3CD4D7;font-weight: 700;margin: 10px;" href="{% url 'history' %}">History</a>
+</div>
+
+
+{% endblock %}

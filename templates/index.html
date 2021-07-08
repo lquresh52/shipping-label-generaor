@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Shipping Label Generator {% endblock %}
+
+{% block in_line_css %}
+<style>
+    body {
+        /*background-color: #80CFA9;*/
+    }
+
+    .login_button {
+        background-color: #FBA446;
+        color: white;
+        font-weight: bold;
+        font-size: 25px;
+        padding: 5px;
+        border: none;
+    }
+</style>
+{% endblock %}
+
+
+{% block in_container %}
+
+<h1 class="mt-5 text-center">Shipping Label Generator</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message == 'Account created successfully' %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: rgb(120, 251, 120) !important;text-align: center;">
+                <strong style="color: white;">{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% else %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: rgb(251, 111, 111) !important;text-align: center;">
+                <strong style="color: white;">{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="mt-5 row">
+    <div class="col-2"></div>
+    <div class="col-8 col-sm-12">
+        <div class="d-lg-flex" style="justify-content: center;border: 1px solid black;">
+            <div class="d-flex side_img">
+                <img class="img-fluid" src="{% static 'images/multi-label-printing-hero.jpg' %}" alt="Shipping label">
+            </div>
+            <div class="form_div p-5">
+                <form method="POST">
+                    {% csrf_token %}
+                    <h3 class="text-center">Login</h3>
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input name="username" type="text" class="form-control" id="username" placeholder="niel123" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+
+                        </div>
+                        <div class="text-center mt-3 mb-3">
+                            <input class="btn login_button" type="submit" value="Login">
+                            <a class="btn login_button" href="{% url 'register' %}">Register</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+
+{% endblock %}

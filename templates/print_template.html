@@ -1,0 +1,51 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Shipping Label</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="mt-5">
+            <div class="text-center ml-logo">
+                <img src="{% static 'images/ml-logo.png' %}" alt="Ml-logo" style="width: 40%;height: 30%;">
+            </div>
+            <div class="text-center address mt-5">
+                <h1>{{shipping_label.customer_name}}</h1>
+                <p style="font-size: 25px;">+91-{{shipping_label.phone_number}}</p>
+                <p style="font-size: 25px;">{{shipping_label.falt_house_no_building_name}},</p>
+                <p style="font-size: 25px;">{{shipping_label.street_colony}}</p>
+                <p style="font-size: 25px;">{{shipping_label.landmark}}</p>
+                <p style="font-size: 25px;">{{shipping_label.city}}, {{shipping_label.state}}-{{shipping_label.pincode}}</p>
+                <hr style="height: 2px;">
+                <h3 class="mt-2">Thank you for buying from us!</h3>
+                <h4>We appreciate your valuable feedbacks.</h4>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <script>
+        function printPopUp() {
+            window.print();
+        }
+        printPopUp();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
